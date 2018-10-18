@@ -1,3 +1,26 @@
 - project:
-    templates:
-      - noop-jobs
+    check:
+      jobs:
+        - tempest-gabbi
+    gate:
+      jobs:
+        - tempest-gabbi
+
+- job:
+    name: tempest-gabbi
+    parent: devstack-tempest
+    description: |
+      A job that can be used as a base for running gabbi tests
+      against a set of directories.
+    vars:
+      # Using placement as a known location, for sake of testing.
+      # If this works, then gabbi-tempest works.
+      gabbi_tempest_path: "{{ devstack_base_dir|default('/opt/stack') }}/placement/gate/gabbits"
+      tox_envlist: all
+      tempest_test_regex: 'gabbi'
+      # run test in serial
+      tempest_concurrency: 1
+      devstack_localrc:
+        # gabbi-tempest is currently unofficial so pull it in as a hack
+        TEMPEST_PLUGINS: 'git+git://github.com/cdent/gabbi-tempest.git#egg=gabbi-tempest'
+        USE_PYTHON3: True
