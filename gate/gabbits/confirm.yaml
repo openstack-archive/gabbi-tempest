@@ -1,0 +1,27 @@
+# A basic set of tests to confirm that we the test environment and plugin
+# system is working as expected. We retrieve some information from keystone
+# and then confirm it against nova.
+
+defaults:
+    request_headers:
+        x-auth-token: $ENVIRON['SERVICE_TOKEN']
+        content-type: application/json
+        accept: application/json
+
+tests:
+
+    - name: retrieve services
+      GET: $ENVIRON['IDENTITY_SERVICE']/v3/services
+      response_json_paths:
+          $.services[?type = compute].name: nova
+
+    - name: retrieve compute endpoint
+      GET: $ENVIRON['IDENTITY_SERVICE']/v3/endpoints?interface=public&service_id=$RESPONSE['$.services[?type = compute].id']
+      response_json_paths:
+          $.endpoints[0].url: $ENVIRON['COMPUTE_SERVICE']
+
+    - name: get compute version doc
+      GET: $RESPONSE['$.endpoints[0].url']
+      redirects: True
+      response_json_paths:
+          $.version.status: CURRENT
