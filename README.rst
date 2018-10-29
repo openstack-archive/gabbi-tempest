@@ -28,3 +28,8 @@ For each service in the service catalog there are
 are also available.
 
 Read the docs at https://gabbi-tempest.readthedocs.io/
+
+.. _Tempest: https://docs.openstack.org/tempest/latest/
+.. _plugin: https://docs.openstack.org/tempest/latest/plugin.html
+.. _gabbi: https://gabbi.readthedocs.org/
+.. _format: https://gabbi.readthedocs.io/en/latest/format.html
