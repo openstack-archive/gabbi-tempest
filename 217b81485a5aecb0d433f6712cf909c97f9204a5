@@ -1,0 +1,8 @@
+Code-Review+2: Chris Dent <cdent@anticdent.org>
+Workflow+1: Chris Dent <cdent@anticdent.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 30 Oct 2018 01:05:32 +0000
+Reviewed-on: https://review.openstack.org/614020
+Project: openstack/gabbi-tempest
+Branch: refs/heads/master
