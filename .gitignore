@@ -1,6 +1,0 @@
-*.pyc
-.coverage
-.testrepository/
-.tox
-doc/build/*
-*.egg*
